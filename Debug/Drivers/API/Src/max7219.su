@@ -1,0 +1,9 @@
+../Drivers/API/Src/max7219.c:7:6:MAX7219_InitAll	24	static
+../Drivers/API/Src/max7219.c:34:6:setPixel16	24	static
+../Drivers/API/Src/max7219.c:47:16:reverseBits	16	static
+../Drivers/API/Src/max7219.c:55:6:updateDisplay16	32	static
+../Drivers/API/Src/max7219.c:68:6:shiftLeft16	16	static
+../Drivers/API/Src/max7219.c:84:24:findChar	24	static
+../Drivers/API/Src/max7219.c:96:6:drawChar16	32	static
+../Drivers/API/Src/max7219.c:110:6:fill16	16	static
+../Drivers/API/Src/max7219.c:115:6:scrollText16	32	static
