@@ -6,4 +6,3 @@
 ../Drivers/API/Src/max7219.c:84:24:findChar	3
 ../Drivers/API/Src/max7219.c:96:6:drawChar16	3
 ../Drivers/API/Src/max7219.c:110:6:fill16	2
-../Drivers/API/Src/max7219.c:115:6:scrollText16	6

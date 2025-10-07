@@ -1,0 +1,3 @@
+../Drivers/API/Src/game.c:7:6:arcadeFSM	8	static
+../Drivers/API/Src/game.c:45:6:systemInit	8	static
+../Drivers/API/Src/game.c:52:6:startScreen	16	static

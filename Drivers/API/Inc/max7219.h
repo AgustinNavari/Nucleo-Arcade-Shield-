@@ -66,4 +66,4 @@ void updateDisplay16(void);
 void shiftLeft16(void);
 void drawChar16(uint8_t x, uint8_t y, char character);
 void fill16(bool on);
-void scrollText16(const char *text, uint32_t delayMs);
+

@@ -6,18 +6,24 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Drivers/API/Src/boardConfig.c \
+../Drivers/API/Src/game.c \
 ../Drivers/API/Src/max7219.c \
-../Drivers/API/Src/max7219_port_stm32.c 
+../Drivers/API/Src/max7219_port_stm32.c \
+../Drivers/API/Src/resources.c 
 
 OBJS += \
 ./Drivers/API/Src/boardConfig.o \
+./Drivers/API/Src/game.o \
 ./Drivers/API/Src/max7219.o \
-./Drivers/API/Src/max7219_port_stm32.o 
+./Drivers/API/Src/max7219_port_stm32.o \
+./Drivers/API/Src/resources.o 
 
 C_DEPS += \
 ./Drivers/API/Src/boardConfig.d \
+./Drivers/API/Src/game.d \
 ./Drivers/API/Src/max7219.d \
-./Drivers/API/Src/max7219_port_stm32.d 
+./Drivers/API/Src/max7219_port_stm32.d \
+./Drivers/API/Src/resources.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -27,7 +33,7 @@ Drivers/API/Src/%.o Drivers/API/Src/%.su Drivers/API/Src/%.cyclo: ../Drivers/API
 clean: clean-Drivers-2f-API-2f-Src
 
 clean-Drivers-2f-API-2f-Src:
-	-$(RM) ./Drivers/API/Src/boardConfig.cyclo ./Drivers/API/Src/boardConfig.d ./Drivers/API/Src/boardConfig.o ./Drivers/API/Src/boardConfig.su ./Drivers/API/Src/max7219.cyclo ./Drivers/API/Src/max7219.d ./Drivers/API/Src/max7219.o ./Drivers/API/Src/max7219.su ./Drivers/API/Src/max7219_port_stm32.cyclo ./Drivers/API/Src/max7219_port_stm32.d ./Drivers/API/Src/max7219_port_stm32.o ./Drivers/API/Src/max7219_port_stm32.su
+	-$(RM) ./Drivers/API/Src/boardConfig.cyclo ./Drivers/API/Src/boardConfig.d ./Drivers/API/Src/boardConfig.o ./Drivers/API/Src/boardConfig.su ./Drivers/API/Src/game.cyclo ./Drivers/API/Src/game.d ./Drivers/API/Src/game.o ./Drivers/API/Src/game.su ./Drivers/API/Src/max7219.cyclo ./Drivers/API/Src/max7219.d ./Drivers/API/Src/max7219.o ./Drivers/API/Src/max7219.su ./Drivers/API/Src/max7219_port_stm32.cyclo ./Drivers/API/Src/max7219_port_stm32.d ./Drivers/API/Src/max7219_port_stm32.o ./Drivers/API/Src/max7219_port_stm32.su ./Drivers/API/Src/resources.cyclo ./Drivers/API/Src/resources.d ./Drivers/API/Src/resources.o ./Drivers/API/Src/resources.su
 
 .PHONY: clean-Drivers-2f-API-2f-Src
 

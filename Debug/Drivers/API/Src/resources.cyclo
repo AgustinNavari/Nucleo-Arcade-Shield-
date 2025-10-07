@@ -1,0 +1,7 @@
+../Drivers/API/Src/resources.c:14:15:delayIsRunning	1
+../Drivers/API/Src/resources.c:18:6:delayInit	1
+../Drivers/API/Src/resources.c:25:8:delayRead	4
+../Drivers/API/Src/resources.c:42:6:delayWrite	2
+../Drivers/API/Src/resources.c:50:6:debounceFSM_init	1
+../Drivers/API/Src/resources.c:55:6:debounceFSM_update	11
+../Drivers/API/Src/resources.c:110:6:readKey	2
