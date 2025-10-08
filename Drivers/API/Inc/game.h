@@ -1,8 +1,7 @@
 #include <stdint.h>
 #include <stdbool.h>
-#include "max7219_port_stm32.h"
-#include "boardConfig.h"
-#include "max7219.h"
+
+
 
 typedef enum {
     BOOT,        // Inicialización del sistema y recursos del juego
@@ -12,6 +11,8 @@ typedef enum {
     GAME_OVER,   // Fin del juego actual
     HSCORE       // Pantalla de puntuación máxima
 } ArcadeState_t;
+
+extern ArcadeState_t arcadeState;
 
 void arcadeFSM(void);
 void systemInit(void);

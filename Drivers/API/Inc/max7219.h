@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include <stdbool.h>
-#include "max7219_port_stm32.h"
+
 #include <string.h>
 
 #define MAX7219_SHUTDOWN 0x0C

@@ -1,18 +1,24 @@
 #include "game.h"
+#include "max7219.h"
+#include "max7219_port_stm32.h"
+#include "boardConfig.h"
+#include "snake.h"
 
-static ArcadeState_t arcadeState = BOOT;
+
+ArcadeState_t arcadeState = BOOT;
 
 
 
 void arcadeFSM(void)
 {
-    switch (arcadeState)
-    {
+    switch (arcadeState){
+
         case BOOT:
 
 		systemInit();
 		startScreen();
-		arcadeState = MENU;
+		snakeInit();
+		arcadeState = PLAYING;
 
             break;
 
@@ -21,7 +27,7 @@ void arcadeFSM(void)
             break;
 
         case PLAYING:
-
+        	snakeUpdate();
             break;
 
         case PAUSED:
@@ -29,6 +35,10 @@ void arcadeFSM(void)
             break;
 
         case GAME_OVER:
+        	fill16(1);
+        	updateDisplay16();
+        	HAL_Delay(1000);
+        	arcadeState = BOOT;
 
             break;
 

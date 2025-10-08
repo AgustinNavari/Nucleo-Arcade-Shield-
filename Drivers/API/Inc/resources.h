@@ -2,8 +2,6 @@
 #include <stdint.h>
 #include "stm32f4xx_hal.h"
 
-#include "boardConfig.h"
-
 #define NUM_BUTTONS 6
 
 typedef bool pinState_t;

@@ -1,4 +1,5 @@
 #include "max7219.h"
+#include "max7219_port_stm32.h"
 
 static uint8_t frameBuffer16[DISPLAY_ROWS][DISPLAY_COLS/8]; // representacion del display en RAM
 

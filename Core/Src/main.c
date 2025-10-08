@@ -18,8 +18,10 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "game.h"
 #include "resources.h"
+#include "snake.h"
+#include "game.h"
+#include "max7219.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -96,6 +98,7 @@ int main(void)
   MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
   systemInit();
+
   updateDisplay16();
   /* USER CODE END 2 */
 
@@ -103,19 +106,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
-
-
 	  for (uint8_t i = 0; i < NUM_BUTTONS; i++) {
 	  	debounceFSM_update(&buttons[i]);
 	  }
 
-	  if (readKey(0)) { drawChar16(0,0,'B'); updateDisplay16();}
-	  if (readKey(1)) { drawChar16(0,0,'S'); updateDisplay16();}
-	  if (readKey(2)) { drawChar16(0,0,'R'); updateDisplay16();}
-	  if (readKey(3)) { drawChar16(0,0,'U'); updateDisplay16();}
-	  if (readKey(4)) { drawChar16(0,0,'L'); updateDisplay16();}
-	  if (readKey(5)) { drawChar16(0,0,'D'); updateDisplay16();}
+	  arcadeFSM();
 
     /* USER CODE END WHILE */
 

@@ -1,0 +1,4 @@
+../Drivers/API/Src/snake.c:14:6:snakeInit	32	static
+../Drivers/API/Src/snake.c:27:13:snakeMove	24	static
+../Drivers/API/Src/snake.c:69:13:snakeDraw	16	static
+../Drivers/API/Src/snake.c:81:6:snakeUpdate	8	static

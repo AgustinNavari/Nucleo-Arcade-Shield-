@@ -1,13 +1,16 @@
 #include "resources.h"
 
+#include "boardConfig.h"
+
+
 static const uint32_t debounceDelay = 40; // determina el tiempo de duracion del delay
 
 button_t buttons[NUM_BUTTONS] = {
-    {GPIOA, GPIO_PIN_8, BUTTON_UP, {0, debounceDelay, false}, false}, // Select / Start
-    {GPIOA, GPIO_PIN_9, BUTTON_UP, {0, debounceDelay, false}, false}, // Back / Pause
+    {GPIOA, GPIO_PIN_8, BUTTON_UP, {0, debounceDelay, false}, false}, // Back / Pause
+    {GPIOA, GPIO_PIN_9, BUTTON_UP, {0, debounceDelay, false}, false}, // Select / Start
     {GPIOB, GPIO_PIN_4, BUTTON_UP, {0, debounceDelay, false}, false}, // Derecha
-    {GPIOB, GPIO_PIN_5, BUTTON_UP, {0, debounceDelay, false}, false}, // Izquierda
-    {GPIOB, GPIO_PIN_6, BUTTON_UP, {0, debounceDelay, false}, false}, // Arriba
+    {GPIOB, GPIO_PIN_5, BUTTON_UP, {0, debounceDelay, false}, false}, // Arriba
+    {GPIOB, GPIO_PIN_6, BUTTON_UP, {0, debounceDelay, false}, false}, // Izquierda
     {GPIOC, GPIO_PIN_7, BUTTON_UP, {0, debounceDelay, false}, false}, // Abajo
 };
 
