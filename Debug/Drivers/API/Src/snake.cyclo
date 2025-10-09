@@ -1,4 +1,5 @@
-../Drivers/API/Src/snake.c:14:6:snakeInit	1
-../Drivers/API/Src/snake.c:27:13:snakeMove	15
-../Drivers/API/Src/snake.c:69:13:snakeDraw	2
-../Drivers/API/Src/snake.c:81:6:snakeUpdate	10
+../Drivers/API/Src/snake.c:14:13:spawnFood	5
+../Drivers/API/Src/snake.c:30:6:snakeInit	1
+../Drivers/API/Src/snake.c:44:13:snakeMove	17
+../Drivers/API/Src/snake.c:92:13:snakeDraw	2
+../Drivers/API/Src/snake.c:104:6:snakeUpdate	10

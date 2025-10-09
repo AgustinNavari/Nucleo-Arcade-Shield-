@@ -1,6 +1,6 @@
 #include "max7219.h"
 #include "max7219_port_stm32.h"
-
+#include "resources.h"
 static uint8_t frameBuffer16[DISPLAY_ROWS][DISPLAY_COLS/8]; // representacion del display en RAM
 
 // Se inicializan los 4 displays
@@ -110,8 +110,26 @@ void drawChar16(uint8_t x, uint8_t y, char character) {
 
 void fill16(bool on)
 {
-    memset(frameBuffer16, on ? 0xFF : 0x00, sizeof(frameBuffer16));
+    memset(frameBuffer16, on ? 0xFF : 0x00, sizeof(frameBuffer16)); // llena todo el buffer con 0 o con 1
 }
 
+delay_t scrollDelay  = {0, TEXTSCROLLSPEED, false};
 
+void scrollText(uint8_t y, char *text) {
+
+    uint8_t textWidth = strlen(text) * 6; // ancho total del texto
+
+    for (int16_t offset = -textWidth; offset < 16; offset++) {
+        fill16(0);
+
+        int len = strlen(text);
+        for (int i = 0; i < len; i++) {
+            int16_t xPos = offset + (len - 1 - i) * 6;
+            drawChar16(xPos, y, text[i]);
+        }
+
+        updateDisplay16();
+        HAL_Delay(100);  // o tu delay no bloqueante
+    }
+}
 

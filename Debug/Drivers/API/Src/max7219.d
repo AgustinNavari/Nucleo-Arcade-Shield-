@@ -27,7 +27,8 @@ Drivers/API/Src/max7219.o: ../Drivers/API/Src/max7219.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
+ /home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/resources.h
 /home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/max7219.h:
 /home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/max7219_port_stm32.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
@@ -57,3 +58,4 @@ Drivers/API/Src/max7219.o: ../Drivers/API/Src/max7219.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
+/home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/resources.h:

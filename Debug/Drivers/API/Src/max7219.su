@@ -6,3 +6,4 @@
 ../Drivers/API/Src/max7219.c:85:24:findChar	24	static
 ../Drivers/API/Src/max7219.c:97:6:drawChar16	32	static
 ../Drivers/API/Src/max7219.c:111:6:fill16	16	static
+../Drivers/API/Src/max7219.c:118:6:scrollText	40	static

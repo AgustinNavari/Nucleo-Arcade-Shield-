@@ -3,7 +3,7 @@
 #include "boardConfig.h"
 
 
-static const uint32_t debounceDelay = 40; // determina el tiempo de duracion del delay
+static const uint32_t debounceDelay = 30; // determina el tiempo de duracion del delay
 
 button_t buttons[NUM_BUTTONS] = {
     {GPIOA, GPIO_PIN_8, BUTTON_UP, {0, debounceDelay, false}, false}, // Back / Pause

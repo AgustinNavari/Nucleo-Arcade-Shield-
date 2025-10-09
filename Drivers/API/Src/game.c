@@ -15,15 +15,19 @@ void arcadeFSM(void)
 
         case BOOT:
 
+        startScreen();
 		systemInit();
-		startScreen();
 		snakeInit();
-		arcadeState = PLAYING;
+		arcadeState = MENU;
 
             break;
 
         case MENU:
-
+        	char text1[] = "NUCLEO ARCADE SHIELD VO1";
+        	char text2[] = "PRESIONE START PARA COMENZAR";
+        	scrollText(0,text1);
+        	scrollText(8,text2);
+        	arcadeState = PLAYING;
             break;
 
         case PLAYING:

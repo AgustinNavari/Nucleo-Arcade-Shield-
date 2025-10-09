@@ -2,14 +2,30 @@
 #include "game.h"
 #include "max7219.h"
 #include "resources.h"
+#include "stm32f4xx_hal.h"
 
 static Snake_t snake;
-static Food_t food;
 static SnakeDir_t snakeDir = UP;
-
-static delay_t snakeSpeed = {0,250,false};
+static Food_t food;
+static delay_t snakeSpeed = {0,200,false};
 
 extern ArcadeState_t arcadeState;
+
+static void spawnFood(void) {
+    uint8_t valid = 0;
+    while (!valid) {
+        food.pos.x = rand() % DISPLAY_COLS;
+        food.pos.y = rand() % DISPLAY_ROWS;
+        valid = 1;
+        for (int i = 0; i < snake.length; i++) {
+            if (food.pos.x == snake.body[i].x && food.pos.y == snake.body[i].y) {
+                valid = 0;
+                break;
+            }
+        }
+    }
+}
+
 
 void snakeInit(void) {
 
@@ -20,7 +36,8 @@ void snakeInit(void) {
     snake.body[0] = (PositionXY_t){8, 8};
     snake.body[1] = (PositionXY_t){7, 8};
     snake.body[2] = (PositionXY_t){6, 8};
-    food.pos = (PositionXY_t){rand() % 16,rand() % 16};
+    spawnFood();
+    updateDisplay16();
 }
 
 
@@ -59,6 +76,12 @@ static void snakeMove(void) {
         }
     }
 
+    if((nextMove.x == food.pos.x) && (nextMove.y == food.pos.y)){
+    	snake.length += 1;
+    	spawnFood();
+    }
+
+
     for (int k = snake.length - 1; k > 0; k--) {
         snake.body[k] = snake.body[k - 1];
     }
@@ -73,8 +96,8 @@ static void snakeDraw(void) {
     for (int i = 0; i < snake.length; i++) {
         setPixel16(snake.body[i].x, snake.body[i].y, 1);
     }
-
-    updateDisplay16(); // envía framebuffer al MAX7219
+    setPixel16(food.pos.x, food.pos.y, 1);
+    updateDisplay16();
 }
 
 
@@ -92,4 +115,6 @@ void snakeUpdate(void) {
         snakeDraw();
     }
 }
+
+
 
