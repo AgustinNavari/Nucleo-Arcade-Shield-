@@ -110,26 +110,49 @@ void drawChar16(uint8_t x, uint8_t y, char character) {
 
 void fill16(bool on)
 {
-    memset(frameBuffer16, on ? 0xFF : 0x00, sizeof(frameBuffer16)); // llena todo el buffer con 0 o con 1
+    memset(frameBuffer16, on ? 0xFF : 0x00, sizeof(frameBuffer16)); // llena el buffer con 0 o con 1
 }
 
-delay_t scrollDelay  = {0, TEXTSCROLLSPEED, false};
 
-void scrollText(uint8_t y, char *text) {
+void scrollTextDual(uint8_t y1, char *text1, uint8_t y2, char *text2) {
 
-    uint8_t textWidth = strlen(text) * 6; // ancho total del texto
+    static int16_t offset = -16;     // posición inicial (fuera de la pantalla)
+    static delay_t scrollDelay;
+    static bool initialized = false;
 
-    for (int16_t offset = -textWidth; offset < 16; offset++) {
+    if (!initialized) {
+        delayInit(&scrollDelay, 120);  // velocidad del scroll
+        initialized = true;
+    }
+
+    if (delayRead(&scrollDelay)) {
         fill16(0);
 
-        int len = strlen(text);
-        for (int i = 0; i < len; i++) {
-            int16_t xPos = offset + (len - 1 - i) * 6;
-            drawChar16(xPos, y, text[i]);
+        // --- Primera línea ---
+        int len1 = strlen(text1);
+        for (int i = 0; i < len1; i++) {
+            // Como X crece hacia la izquierda, restamos el avance
+            int16_t x = offset - i * 6;
+            drawChar16(x, y1, text1[i]);
+        }
+
+        // --- Segunda línea ---
+        int len2 = strlen(text2);
+        for (int i = 0; i < len2; i++) {
+            int16_t x = offset - i * 6;
+            drawChar16(x, y2, text2[i]);
         }
 
         updateDisplay16();
-        HAL_Delay(100);  // o tu delay no bloqueante
+
+        // En tu sistema, para moverse “hacia la izquierda visual” hay que sumar
+        offset++;
+
+        // cuando el texto salió completamente del display, reinicia
+        int textWidth = (strlen(text1) > strlen(text2) ? strlen(text1) : strlen(text2)) * 6;
+        if (offset > textWidth) offset = -16;
     }
 }
+
+
 

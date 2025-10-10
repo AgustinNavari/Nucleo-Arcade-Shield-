@@ -3,7 +3,7 @@
 #include "max7219_port_stm32.h"
 #include "boardConfig.h"
 #include "snake.h"
-
+#include "resources.h"
 
 ArcadeState_t arcadeState = BOOT;
 
@@ -25,9 +25,8 @@ void arcadeFSM(void)
         case MENU:
         	char text1[] = "NUCLEO ARCADE SHIELD VO1";
         	char text2[] = "PRESIONE START PARA COMENZAR";
-        	scrollText(0,text1);
-        	scrollText(8,text2);
-        	arcadeState = PLAYING;
+        	scrollTextDual(0, text1, 8, text2);
+        	if (readKey(1)) arcadeState = PLAYING;
             break;
 
         case PLAYING:
