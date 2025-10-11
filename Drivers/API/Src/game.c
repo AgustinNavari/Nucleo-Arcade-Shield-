@@ -4,9 +4,10 @@
 #include "boardConfig.h"
 #include "snake.h"
 #include "resources.h"
+#include "At24c256.h"
+#include <stdio.h>
 
 ArcadeState_t arcadeState = BOOT;
-
 
 
 void arcadeFSM(void)
@@ -17,7 +18,6 @@ void arcadeFSM(void)
 
         startScreen();
 		systemInit();
-		snakeInit();
 		arcadeState = MENU;
 
             break;
@@ -26,11 +26,19 @@ void arcadeFSM(void)
         	char text1[] = "NUCLEO ARCADE SHIELD VO1";
         	char text2[] = "PRESIONE START PARA COMENZAR";
         	scrollTextDual(0, text1, 8, text2);
-        	if (readKey(1)) arcadeState = PLAYING;
+        	if (readKey(1)){
+        		arcadeState = PLAYING;
+        		snakeInit();
+        	}
             break;
 
         case PLAYING:
-        	snakeUpdate();
+        	if(snakeUpdate() == false){
+        		if(currentScore > loadScore()){
+        			saveScore(currentScore);
+        		}
+        		arcadeState = GAME_OVER;
+        	}
             break;
 
         case PAUSED:
@@ -38,10 +46,14 @@ void arcadeFSM(void)
             break;
 
         case GAME_OVER:
-        	fill16(1);
-        	updateDisplay16();
-        	HAL_Delay(1000);
-        	arcadeState = BOOT;
+        	char text3[40];
+        	sprintf(text3,"TU PUNTUACION FUE: %u", currentScore);
+        	char text4[40];
+        	sprintf(text4,"LA PUNTUACION MAS ALTA ES: %u", loadScore());
+        	scrollTextDual(0, text3, 8, text4);
+            if (readKey(1)) {
+                arcadeState = MENU;
+            }
 
             break;
 

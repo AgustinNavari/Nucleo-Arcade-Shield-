@@ -1,0 +1,2 @@
+../Drivers/API/Src/At24c256_port_stm32.c:4:6:EEPROM_Write	2
+../Drivers/API/Src/At24c256_port_stm32.c:21:10:EEPROM_Read	1

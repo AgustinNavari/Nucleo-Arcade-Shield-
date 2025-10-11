@@ -1,8 +1,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-
-
 typedef enum {
     BOOT,        // Inicialización del sistema y recursos del juego
     MENU,        // Menú principal (selección o inicio del juego)
@@ -13,6 +11,7 @@ typedef enum {
 } ArcadeState_t;
 
 extern ArcadeState_t arcadeState;
+
 
 void arcadeFSM(void);
 void systemInit(void);
