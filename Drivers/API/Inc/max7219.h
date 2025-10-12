@@ -17,6 +17,7 @@
 
 typedef struct { char ch; uint8_t col[5]; } Chars5x7;
 
+
 static const Chars5x7 font5x7[] = {
     { ' ', { 0x00,0x00,0x00,0x00,0x00 } },
     { '.', { 0x00,0x00,0x00,0x60,0x60 } },
@@ -65,8 +66,11 @@ static const uint8_t TEXTSCROLLSPEED = 80;
 void setPixel16(uint8_t x, uint8_t y, bool on);
 void MAX7219_InitAll(void);
 void updateDisplay16(void);
-void shiftLeft16(void);
-void drawChar16(uint8_t x, uint8_t y, char character);
 void fill16(bool on);
-void scrollTextDual(uint8_t y1, char *text1, uint8_t y2, char *text2);
+void scrollTextDual(uint8_t y1, char *text1, uint8_t y2, char *text2, bool reset);
+bool scrollTextDualState(uint8_t y1, char *text1, uint8_t y2, char *text2);
+void scrollTextDualReset(void);
+
+
+
 

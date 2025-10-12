@@ -6,13 +6,9 @@
 
 static Snake_t snake;
 static Food_t food;
-static delay_t snakeSpeed = {0,200,false};
-
+static delay_t snakeSpeed;
 uint16_t currentScore;
-
 extern ArcadeState_t arcadeState;
-
-
 
 static void spawnFood(void) {
     uint8_t valid = 0;
@@ -29,11 +25,10 @@ static void spawnFood(void) {
     }
 }
 
+//snakeInit inicializa una nueva serpiente
 void snakeInit(void) {
 
 	delayInit(&snakeSpeed, 120);
-    snakeSpeed.running = false;   // por las dudas
-    snakeSpeed.startTime = 0;
     snake.length = 3;
     snake.dir = UP;
     snake.snakeStatus = ALIVE;
@@ -51,35 +46,34 @@ void snakeInit(void) {
 
 }
 
-
+// snakeMove se encarga del movimiento de la serpiente y validar si esta no choca
 static void snakeMove(void) {
 
-    PositionXY_t nextMove = snake.body[0];     // determina la proxima posicion de la cabeza
+    PositionXY_t nextMove = snake.body[0];     // seteamos nextMove en la "cabeza" de la serpiente
     snake.snakeStatus = ALIVE;
 
-    switch (snake.dir) {
+    switch (snake.dir) { // movemos la cabeza segun corresponda
         case UP:
-            if (nextMove.y > 0) nextMove.y--;
+            nextMove.y--;
             break;
         case DOWN:
-            if (nextMove.y < 15) nextMove.y++;
+            nextMove.y++;
             break;
         case LEFT:
-            if (nextMove.x > 0) nextMove.x++;
+            nextMove.x++;
             break;
         case RIGHT:
-            if (nextMove.x < 15) nextMove.x--;
+            nextMove.x--;
             break;
         default:
         	snake.dir = UP;
             break;
     }
 
-
-    if (nextMove.x < 0 || nextMove.x > 15 || nextMove.y < 0 || nextMove.y > 15) { //detecta si choca con paredes
+    if (nextMove.x < 0 || nextMove.x > 15 || nextMove.y < 0 || nextMove.y > 15) { //validamos que la nueva posicion de la cabeza este dentro del tablero
     	snake.snakeStatus = DEAD;
-    	return;
-    }
+    	return; }
+
 
     for (int i = 1; i < snake.length; i++) { // detecta si choca con sigo misma
         if (snake.body[i].x == nextMove.x && snake.body[i].y == nextMove.y) {
@@ -88,20 +82,21 @@ static void snakeMove(void) {
         }
     }
 
-    if((nextMove.x == food.pos.x) && (nextMove.y == food.pos.y)){
+    if((nextMove.x == food.pos.x) && (nextMove.y == food.pos.y)){ // si pasa por la comida, suma puntos, aumenta la longitud y spawnea una nueva "manzana"
     	snake.length += 1;
     	currentScore += 1;
     	spawnFood();
     }
 
 
-    for (int k = snake.length - 1; k > 0; k--) {
+    for (uint8_t k = snake.length - 1; k > 0; k--) { //movemos la serpiente
         snake.body[k] = snake.body[k - 1];
     }
 
-    snake.body[0] = nextMove;
+    snake.body[0] = nextMove; //movemos la cabeza
 }
 
+//dibuja la serpiente en pantalla
 static void snakeDraw(void) {
 
 	fill16(0);
@@ -113,18 +108,19 @@ static void snakeDraw(void) {
     updateDisplay16();
 }
 
-
+//snakeUpdate devuelve true si la serpiente sigue viva o false si la serpiente choco.
 bool snakeUpdate(void) {
 
 	if (snake.snakeStatus == DEAD){
 		return false;
 	}
-
+// segun el boton que se presione cambia la direccion de la serpiente. Aca se valida que la serpiente no pueda "volver sobre si misma"
     if (readKey(2) && snake.dir != LEFT) snake.dir = RIGHT;
     if (readKey(3) && snake.dir != DOWN) snake.dir = UP;
     if (readKey(4) && snake.dir != RIGHT) snake.dir = LEFT;
     if (readKey(5) && snake.dir != UP) snake.dir = DOWN;
 
+//si paso el "Tick" de la serpiente la actualiza
     if ((HAL_GetTick() - snakeSpeed.startTime) >= snakeSpeed.duration) {
         snakeSpeed.startTime = HAL_GetTick();
 

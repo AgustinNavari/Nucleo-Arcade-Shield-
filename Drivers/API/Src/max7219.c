@@ -65,21 +65,6 @@ void updateDisplay16(void)
     }
 }
 
-// desplaza lo que hay en el frameBuffer una posicion a la izquierda
-void shiftLeft16(void){
-
-	for(uint8_t y = 0 ; y < DISPLAY_ROWS ; y++){
-
-		uint16_t combined = ((uint16_t)frameBuffer16[y][0] << 8) | frameBuffer16[y][1];
-
-		uint16_t msb = (combined & 0x8000) >> 15;
-
-		combined = (combined << 1) | msb;
-
-		frameBuffer16[y][0] =  combined >> 8 & 0xFF;
-		frameBuffer16[y][1] =  combined & 0xFF;
-	}
-}
 
 // funcion auxiliar que busca un caracter en la lista de caracteres y devuelve un puntero a ese caracter
 static const Chars5x7* findChar(char character){
@@ -94,7 +79,7 @@ static const Chars5x7* findChar(char character){
 
 // dibuja un caracter con la esquina superior izquierda ubicada en (x,y)
 
-void drawChar16(uint8_t x, uint8_t y, char character) {
+static void drawChar16(uint8_t x, uint8_t y, char character) {
 
 	const Chars5x7* symbol = findChar(character);
 
@@ -114,14 +99,14 @@ void fill16(bool on)
 }
 
 
-void scrollTextDual(uint8_t y1, char *text1, uint8_t y2, char *text2) {
+void scrollTextDual(uint8_t y1, char *text1, uint8_t y2, char *text2, bool reset) {
 
     static int16_t offset = -16;     // posición inicial (fuera de la pantalla)
     static delay_t scrollDelay;
     static bool initialized = false;
 
     if (!initialized) {
-        delayInit(&scrollDelay, 120);  // velocidad del scroll
+        delayInit(&scrollDelay, 80);  // velocidad del scroll
         initialized = true;
     }
 
@@ -153,6 +138,7 @@ void scrollTextDual(uint8_t y1, char *text1, uint8_t y2, char *text2) {
         if (offset > textWidth) offset = -16;
     }
 }
+
 
 
 
