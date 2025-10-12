@@ -2,10 +2,11 @@
 #include <stdint.h>
 #include "stm32f4xx_hal.h"
 
-#define NUM_BUTTONS 6
+#define NUM_BUTTONS 6 //cantidad de botones
 
 typedef bool pinState_t;
 typedef bool bool_t;
+
 
 typedef enum{
 	BUTTON_UP,
@@ -23,6 +24,7 @@ typedef struct{
 	bool_t running;
 }delay_t;
 
+// Estructura que define a cada boton
 typedef struct {
 	GPIO_TypeDef *port;
 	uint16_t pin;

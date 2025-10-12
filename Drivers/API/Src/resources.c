@@ -3,7 +3,7 @@
 #include "boardConfig.h"
 
 
-static const uint32_t debounceDelay = 30; // determina el tiempo de duracion del delay
+static const uint32_t debounceDelay = 30; // determina el tiempo de duracion del delay para el debounce
 
 button_t buttons[NUM_BUTTONS] = {
     {GPIOA, GPIO_PIN_8, BUTTON_UP, {0, debounceDelay, false}, false}, // Back / Pause
@@ -54,10 +54,10 @@ void debounceFSM_init(button_t * btn){
 	btn -> state = BUTTON_UP;
 }
 
-// debounceFSM_update maneja los cambios de estado
+// debounceFSM_update maneja los cambios de estado de los botones
 void debounceFSM_update(button_t * btn){
 
-	bool pin = HAL_GPIO_ReadPin(btn -> port, btn -> pin); // lee el estado del pin
+	bool pin = HAL_GPIO_ReadPin(btn -> port, btn -> pin); // lee el estado del pin. 0 -> boton presionado ; 1 -> boton suelto
 
 	switch(btn -> state){
 		case BUTTON_UP:
@@ -65,7 +65,6 @@ void debounceFSM_update(button_t * btn){
 			if(!pin){
 				btn -> state = BUTTON_FALLING;
 				delayInit(&btn->delay,debounceDelay);
-				delayRead(&btn->delay);
 			}
 			break;
 

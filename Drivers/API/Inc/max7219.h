@@ -3,21 +3,24 @@
 
 #include <string.h>
 
+// registros del MAX7219 para inicializar
 #define MAX7219_SHUTDOWN 0x0C
 #define	MAX7219_TEST 0x0F
 #define MAX7219_MODE 0x09
 #define MAX7219_SCAN 0x0B
 #define MAX7219_BRIGHTNESS 0x0A
 
+// filas y columnas de cada MAX7219
 #define MAX7219_ROWS 8
 #define MAX7219_COLS 8
 
+// filas y columnas del dsiplay
 #define DISPLAY_ROWS 16
 #define DISPLAY_COLS 16
 
 typedef struct { char ch; uint8_t col[5]; } Chars5x7;
 
-
+// caracteres que se pueden dibujar en pantalla
 static const Chars5x7 font5x7[] = {
     { ' ', { 0x00,0x00,0x00,0x00,0x00 } },
     { '.', { 0x00,0x00,0x00,0x60,0x60 } },
@@ -68,8 +71,7 @@ void MAX7219_InitAll(void);
 void updateDisplay16(void);
 void fill16(bool on);
 void scrollTextDual(uint8_t y1, char *text1, uint8_t y2, char *text2, bool reset);
-bool scrollTextDualState(uint8_t y1, char *text1, uint8_t y2, char *text2);
-void scrollTextDualReset(void);
+
 
 
 

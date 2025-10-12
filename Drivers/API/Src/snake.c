@@ -10,13 +10,16 @@ static delay_t snakeSpeed;
 uint16_t currentScore;
 extern ArcadeState_t arcadeState;
 
+static const uint8_t SNAKESPEED = 110; //velodicad de la serpiente
+
+//spawnFood hace aparecer una nueva manzana dentro del tablero. Valida que no aparezca sobre la serpiente.
 static void spawnFood(void) {
     uint8_t valid = 0;
     while (!valid) {
         food.pos.x = rand() % DISPLAY_COLS;
         food.pos.y = rand() % DISPLAY_ROWS;
         valid = 1;
-        for (int i = 0; i < snake.length; i++) {
+        for (uint16_t i = 0; i < snake.length; i++) {
             if (food.pos.x == snake.body[i].x && food.pos.y == snake.body[i].y) {
                 valid = 0;
                 break;
@@ -28,7 +31,7 @@ static void spawnFood(void) {
 //snakeInit inicializa una nueva serpiente
 void snakeInit(void) {
 
-	delayInit(&snakeSpeed, 120);
+	delayInit(&snakeSpeed, SNAKESPEED);
     snake.length = 3;
     snake.dir = UP;
     snake.snakeStatus = ALIVE;
@@ -46,7 +49,7 @@ void snakeInit(void) {
 
 }
 
-// snakeMove se encarga del movimiento de la serpiente y validar si esta no choca
+// snakeMove se encarga del movimiento de la serpiente y validar que no haya chocado consigo misma o con el borde del tablero
 static void snakeMove(void) {
 
     PositionXY_t nextMove = snake.body[0];     // seteamos nextMove en la "cabeza" de la serpiente
@@ -74,41 +77,39 @@ static void snakeMove(void) {
     	snake.snakeStatus = DEAD;
     	return; }
 
-
-    for (int i = 1; i < snake.length; i++) { // detecta si choca con sigo misma
+    for (int i = 1; i < snake.length; i++) { 									// validamos si choca consigo misma
         if (snake.body[i].x == nextMove.x && snake.body[i].y == nextMove.y) {
         	snake.snakeStatus = DEAD;
         	return;
         }
     }
 
-    if((nextMove.x == food.pos.x) && (nextMove.y == food.pos.y)){ // si pasa por la comida, suma puntos, aumenta la longitud y spawnea una nueva "manzana"
+    if((nextMove.x == food.pos.x) && (nextMove.y == food.pos.y)){ 				// si pasa por la comida, suma puntos, aumenta la longitud y spawnea una nueva "manzana"
     	snake.length += 1;
     	currentScore += 1;
     	spawnFood();
     }
 
-
-    for (uint8_t k = snake.length - 1; k > 0; k--) { //movemos la serpiente
+    for (uint8_t k = snake.length - 1; k > 0; k--) { 							//movemos la serpiente
         snake.body[k] = snake.body[k - 1];
     }
 
-    snake.body[0] = nextMove; //movemos la cabeza
+    snake.body[0] = nextMove; 													//movemos la cabeza
 }
 
-//dibuja la serpiente en pantalla
+// snakeDraw dibuja la serpiente y la comida en pantalla
 static void snakeDraw(void) {
 
 	fill16(0);
 
-    for (int i = 0; i < snake.length; i++) {
+    for (uint16_t i = 0; i < snake.length; i++) {
         setPixel16(snake.body[i].x, snake.body[i].y, 1);
     }
     setPixel16(food.pos.x, food.pos.y, 1);
     updateDisplay16();
 }
 
-//snakeUpdate devuelve true si la serpiente sigue viva o false si la serpiente choco.
+// snakeUpdate mueve la serpiente segun los comandos del usuario. Devuelve true si la serpiente sigue viva o false si la serpiente choco.
 bool snakeUpdate(void) {
 
 	if (snake.snakeStatus == DEAD){

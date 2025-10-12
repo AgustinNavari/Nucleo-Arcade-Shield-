@@ -29,7 +29,8 @@ Drivers/API/Src/At24c256_port_stm32.o: \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
+ /home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/boardConfig.h
 /home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/At24c256_port_stm32.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -60,3 +61,4 @@ Drivers/API/Src/At24c256_port_stm32.o: \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
+/home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/boardConfig.h:

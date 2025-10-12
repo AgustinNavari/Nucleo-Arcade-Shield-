@@ -4,4 +4,4 @@
 ../Drivers/API/Src/resources.c:45:6:delayWrite	16	static
 ../Drivers/API/Src/resources.c:53:6:debounceFSM_init	16	static
 ../Drivers/API/Src/resources.c:58:6:debounceFSM_update	24	static
-../Drivers/API/Src/resources.c:113:6:readKey	16	static
+../Drivers/API/Src/resources.c:112:6:readKey	16	static

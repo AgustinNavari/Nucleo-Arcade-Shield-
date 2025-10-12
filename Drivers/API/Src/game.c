@@ -1,6 +1,5 @@
 #include "game.h"
 #include "max7219.h"
-#include "max7219_port_stm32.h"
 #include "boardConfig.h"
 #include "snake.h"
 #include "resources.h"
@@ -9,25 +8,25 @@
 
 ArcadeState_t arcadeState = BOOT;
 
-
+//arcadeFSM controla los diferentes posibles estados del juego.
 void arcadeFSM(void)
 {
     switch (arcadeState){
 
+    	//BOOT inicializa el HW y muestra la animacion de inicio
         case BOOT:
-
-        startScreen();
-		systemInit();
-		arcadeState = MENU;
-
-            break;
+			systemInit();
+			startScreen();
+			arcadeState = MENU;
+			break;
 
         case MENU:
-        	char text1[] = "NUCLEO ARCADE SHIELD VO1";
-        	char text2[] = "PRESIONE START PARA COMENZAR";
+        	char text1[] = "SNAKE";
+        	char text2[] = "PRESIONE START";
         	scrollTextDual(0, text1, 8, text2,false);
         	if (readKey(1)){
         		arcadeState = PLAYING;
+        		startScreen();
         		snakeInit();
         	}
         	if (readKey(0)){
@@ -42,6 +41,7 @@ void arcadeFSM(void)
         		if(currentScore > loadScore()){
         			saveScore(currentScore);
         		}
+        		startScreen();
         		arcadeState = GAME_OVER;
         	}
         	if (readKey(0)){
@@ -65,9 +65,10 @@ void arcadeFSM(void)
         	char text3[40];
         	sprintf(text3,"ACTUAL %u", currentScore);
         	char text4[40];
-        	sprintf(text4,"MAX %u", loadScore());
+        	sprintf(text4,"HIGHSCORE %u", loadScore());
         	scrollTextDual(0, text3, 8, text4,true);
             if (readKey(1)) {
+            	startScreen();
                 arcadeState = MENU;
             }
 
@@ -75,10 +76,9 @@ void arcadeFSM(void)
 
         case HSCORE:
 
-           	char text7[40];
-			sprintf(text7,"HIGHSCORE");
+        	char text7[] = "HIGHSCORE";
 			char text8[40];
-			sprintf(text8,"       %u", loadScore());
+			sprintf(text8,"         %u", loadScore());
 			scrollTextDual(0, text7, 8, text8,true);
             if (readKey(1)) {
                 arcadeState = MENU;
@@ -91,13 +91,17 @@ void arcadeFSM(void)
     }
 }
 
+// Inicializa el hardware necesario
 void systemInit(void)
 {
-    // Inicializa el hardware necesario
 	board_gpio_init();
+	I2C1_Init();
+	SPI2_Init();
 	MAX7219_InitAll();
 }
 
+
+// startScreen es una animacion para cuando se inicia el juego o se cambia de pantalla
 void startScreen(void){
 
     fill16(0);
@@ -110,5 +114,5 @@ void startScreen(void){
         updateDisplay16();
         HAL_Delay(50);
     }
-    HAL_Delay(100);
+
 }

@@ -1,2 +1,2 @@
-../Drivers/API/Src/At24c256.c:3:6:saveScore	16	static
-../Drivers/API/Src/At24c256.c:7:10:loadScore	8	static
+../Drivers/API/Src/At24c256.c:4:6:saveScore	16	static
+../Drivers/API/Src/At24c256.c:8:10:loadScore	8	static

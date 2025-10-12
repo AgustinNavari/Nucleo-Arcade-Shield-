@@ -1,7 +1,7 @@
 Drivers/API/Src/game.o: ../Drivers/API/Src/game.c \
  /home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/game.h \
  /home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/max7219.h \
- /home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/max7219_port_stm32.h \
+ /home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/boardConfig.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -31,14 +31,13 @@ Drivers/API/Src/game.o: ../Drivers/API/Src/game.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- /home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/boardConfig.h \
  /home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/snake.h \
  /home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/resources.h \
  /home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/At24c256.h \
  /home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/At24c256_port_stm32.h
 /home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/game.h:
 /home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/max7219.h:
-/home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/max7219_port_stm32.h:
+/home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/boardConfig.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:
@@ -68,7 +67,6 @@ Drivers/API/Src/game.o: ../Drivers/API/Src/game.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
-/home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/boardConfig.h:
 /home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/snake.h:
 /home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/resources.h:
 /home/agustin/Desktop/CESE\ 25/NucleoShield\ Arcade\ V01/NucleoShield\ Arcade/Drivers/API/Inc/At24c256.h:

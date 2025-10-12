@@ -1,1 +1,4 @@
-../Drivers/API/Src/boardConfig.c:3:6:board_gpio_init	48	static
+../Drivers/API/Src/boardConfig.c:4:6:Error_Handler	4	static
+../Drivers/API/Src/boardConfig.c:12:6:board_gpio_init	48	static
+../Drivers/API/Src/boardConfig.c:58:6:SPI2_Init	8	static
+../Drivers/API/Src/boardConfig.c:83:6:I2C1_Init	8	static
