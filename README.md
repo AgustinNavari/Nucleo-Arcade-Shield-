@@ -68,6 +68,7 @@ Nucleo_Arcade_Shield/
 | **GAME_OVER** | Muestra puntaje final y récord. |
 | **HSCORE** |  Muestra la puntuación más alta almacenada. |
 
+![Diagrama de bloques del Hardware](Imagenes/diagramaMEF.png)
 
 ## Fotos
 
