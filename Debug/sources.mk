@@ -26,4 +26,5 @@ Core/Src \
 Core/Startup \
 Drivers/API/Src \
 Drivers/STM32F4xx_HAL_Driver/Src \
+Game/Src \
 

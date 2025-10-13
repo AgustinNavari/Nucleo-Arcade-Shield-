@@ -16,7 +16,7 @@ S_DEPS += \
 
 # Each subdirectory must supply rules for building sources it contributes
 Core/Startup/%.o: ../Core/Startup/%.s Core/Startup/subdir.mk
-	arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -I"/home/agustin/Desktop/CESE 25/NucleoShield Arcade V01/NucleoShield Arcade/Drivers/API/Src" -I"/home/agustin/Desktop/CESE 25/NucleoShield Arcade V01/NucleoShield Arcade/Drivers/API/Inc" -x assembler-with-cpp -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@" "$<"
+	arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -I"/home/agustin/Desktop/CESE 25/NucleoShield Arcade V01/NucleoShield Arcade/Drivers/API/Src" -I"/home/agustin/Desktop/CESE 25/NucleoShield Arcade V01/NucleoShield Arcade/Drivers/API/Inc" -I"/home/agustin/Desktop/CESE 25/NucleoShield Arcade V01/NucleoShield Arcade/Game" -I"/home/agustin/Desktop/CESE 25/NucleoShield Arcade V01/NucleoShield Arcade/Game/Inc" -I"/home/agustin/Desktop/CESE 25/NucleoShield Arcade V01/NucleoShield Arcade/Game/Src" -x assembler-with-cpp -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@" "$<"
 
 clean: clean-Core-2f-Startup
 

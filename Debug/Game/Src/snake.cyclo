@@ -1,0 +1,5 @@
+../Game/Src/snake.c:16:13:spawnFood	5
+../Game/Src/snake.c:32:6:snakeInit	2
+../Game/Src/snake.c:53:13:snakeMove	13
+../Game/Src/snake.c:101:13:snakeDraw	2
+../Game/Src/snake.c:113:6:snakeUpdate	11

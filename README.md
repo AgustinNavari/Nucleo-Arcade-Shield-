@@ -21,32 +21,41 @@ El sistema implementa una máquina de estados finitos para manejar las diferente
 ## Arquitectura del firmware
 
 ```text
-Nucleo_Arcade_Shield_Snake/
+Nucleo_Arcade_Shield/
 ├── Core/
-│   ├── main.c
-│   ├── main.h
-│   ├── boardConfig.c
-│   └── boardConfig.h
+│   ├── Inc/
+│   │   └── main.h
+│   └── Src/
+│       └── main.c
 │
 ├── Drivers/
-│   ├── max7219.c
-│   ├── max7219.h
-│   ├── max7219_port_stm32.c
-│   ├── max7219_port_stm32.h
-│   ├── At24c256.c
-│   ├── At24c256.h
-│   ├── At24c256_port_stm32.c
-│   └── At24c256_port_stm32.h
+│   └── API/
+│       ├── Inc/
+│       │   ├── boardConfig.h
+│       │   ├── resources.h
+│       │   ├── max7219.h
+│       │   ├── max7219_port_stm32.h
+│       │   ├── At24c256.h
+│       │   └── At24c256_port_stm32.h
+│       │
+│       └── Src/
+│           ├── boardConfig.c
+│           ├── resources.c
+│           ├── max7219.c
+│           ├── max7219_port_stm32.c
+│           ├── At24c256.c
+│           └── At24c256_port_stm32.c
 │
 ├── Game/
-│   ├── game.c
-│   ├── game.h
-│   ├── snake.c
-│   ├── snake.h
-│   ├── resources.c
-│   └── resources.h
+│   ├── Inc/
+│   │   ├── game.h
+│   │   └── snake.h
+│   └── Src/
+│       ├── game.c
+│       └── snake.c
 │
 └── README.md
+
 ```
 
 ## Estados del sistema (MEF)
