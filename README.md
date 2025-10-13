@@ -16,10 +16,11 @@ El sistema implementa una máquina de estados finitos para manejar las diferente
 
 ## Diagrama de Bloques
 
-![Diagrama de bloques del Hardware](imagenes/diagramaDeBloques.jpeg)
+![Diagrama de bloques del Hardware](Imagenes/diagramaDeBloques.jpg)
 
 ## Arquitectura del firmware
 
+```text
 Nucleo_Arcade_Shield_Snake/
 ├── Core/
 │   ├── main.c
@@ -46,6 +47,7 @@ Nucleo_Arcade_Shield_Snake/
 │   └── resources.h
 │
 └── README.md
+```
 
 ## Estados del sistema (MEF)
 | Estado | Descripción |
