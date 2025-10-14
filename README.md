@@ -72,6 +72,8 @@ Nucleo_Arcade_Shield/
 
 ## Fotos
 
-fotos
+![Foto Hardware](Imagenes/snakePicture.jpg)
 
 ## Video
+
+![video gameplay](imagenes/snakeGIF.gif)
