@@ -20,6 +20,9 @@
 
 typedef struct { char ch; uint8_t col[5]; } Chars5x7;
 
+#define FONT_ROWS 7
+#define FONT_COLS 5
+
 // caracteres que se pueden dibujar en pantalla
 static const Chars5x7 font5x7[] = {
     { ' ', { 0x00,0x00,0x00,0x00,0x00 } },

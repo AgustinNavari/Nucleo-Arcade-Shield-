@@ -29,10 +29,11 @@ void MAX7219_InitAll(void)
 
 // enciende o apaga un pixel de la matriz en la posicion (x,y)
 void setPixel16(uint8_t x, uint8_t y, bool on) {
-    if (x >= DISPLAY_COLS || y >= DISPLAY_ROWS) return;  // fuera de rango
 
-    uint8_t byteIndex = x / 8;       // 0 o 1
-    uint8_t bitIndex  = x % 8;       // 0 a 7
+    if (x >= DISPLAY_COLS || y >= DISPLAY_ROWS) return;  // valida que este dentro del rango de la pantalla
+
+    uint8_t byteIndex = x / MAX7219_COLS;       // 0 o 1
+    uint8_t bitIndex  = x % MAX7219_COLS;       // 0 a 7
 
     if (on)
         frameBuffer16[y][byteIndex] |=  (1 << bitIndex);
@@ -51,7 +52,7 @@ static uint8_t reverseBits(uint8_t b) {
 // actualiza el display con lo que hay en el frameBuffer. Considera que en mi HW, los dos displays de abajo estan boca abajo e invertidos
 void updateDisplay16(void)
 {
-    for (uint8_t y = 0; y < 8; y++) {
+    for (uint8_t y = 0; y < MAX7219_ROWS; y++) {
         uint8_t TL = frameBuffer16[y][1];
         uint8_t TR = frameBuffer16[y][0];
         uint8_t BL = reverseBits(frameBuffer16[15-y][1]);
@@ -78,10 +79,10 @@ static void drawChar16(uint8_t x, uint8_t y, char character) {
 
 	const Chars5x7* symbol = findChar(character);
 
-    for (uint8_t column = 0; column < 5; column++) {
+    for (uint8_t column = 0; column < FONT_COLS; column++) {
         uint8_t columnBits = symbol->col[column];
 
-        for (uint8_t row = 0; row < 7; row++) {
+        for (uint8_t row = 0; row < FONT_ROWS; row++) {
             bool on = columnBits & (1 << row);
             setPixel16(x + (4- column), y + row, on);
         }
