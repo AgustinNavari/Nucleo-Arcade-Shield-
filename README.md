@@ -70,10 +70,10 @@ Nucleo_Arcade_Shield/
 
 ![Diagrama de bloques del Hardware](Imagenes/diagramaMEF.png)
 
-## Fotos
+## Foto del Hardware
 
 ![Foto Hardware](Imagenes/snakePicture.jpg)
 
 ## Video
 
-![video gameplay](imagenes/snakeGIF.gif)
+![video gameplay](Imagenes/snakeGIF.gif)
