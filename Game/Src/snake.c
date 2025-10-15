@@ -116,10 +116,10 @@ bool snakeUpdate(void) {
 		return false;
 	}
 // segun el boton que se presione cambia la direccion de la serpiente. Aca se valida que la serpiente no pueda "volver sobre si misma"
-    if (readKey(2) && snake.dir != LEFT) snake.dir = RIGHT;
-    if (readKey(3) && snake.dir != DOWN) snake.dir = UP;
-    if (readKey(4) && snake.dir != RIGHT) snake.dir = LEFT;
-    if (readKey(5) && snake.dir != UP) snake.dir = DOWN;
+    if (readKey(DERECHA) && snake.dir != LEFT) snake.dir = RIGHT;
+    if (readKey(ARRIBA) && snake.dir != DOWN) snake.dir = UP;
+    if (readKey(IZQUIERDA) && snake.dir != RIGHT) snake.dir = LEFT;
+    if (readKey(ABAJO) && snake.dir != UP) snake.dir = DOWN;
 
 //si paso el "tick" de la serpiente la actualiza
     if ((HAL_GetTick() - snakeSpeed.startTime) >= snakeSpeed.duration) {
