@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0000712c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000ce97  00000000  00000000  0000715c  2**0
+ 12 .debug_info   0000cec9  00000000  00000000  0000715c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 000029d7  00000000  00000000  00013ff3  2**0
+ 13 .debug_abbrev 000029d6  00000000  00000000  00014025  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000c48  00000000  00000000  000169d0  2**3
+ 14 .debug_aranges 00000c48  00000000  00000000  00016a00  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 00000961  00000000  00000000  00017618  2**0
+ 15 .debug_rnglists 00000961  00000000  00000000  00017648  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00023c57  00000000  00000000  00017f79  2**0
+ 16 .debug_macro  00023c57  00000000  00000000  00017fa9  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00011c6a  00000000  00000000  0003bbd0  2**0
+ 17 .debug_line   00011c6a  00000000  00000000  0003bc00  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000ce9e7  00000000  00000000  0004d83a  2**0
+ 18 .debug_str    000ce9e7  00000000  00000000  0004d86a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  0011c221  2**0
+ 19 .comment      00000043  00000000  00000000  0011c251  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00003b4c  00000000  00000000  0011c264  2**2
+ 20 .debug_frame  00003b4c  00000000  00000000  0011c294  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000078  00000000  00000000  0011fdb0  2**0
+ 21 .debug_line_str 00000078  00000000  00000000  0011fde0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -2155,11 +2155,13 @@ void setPixel16(uint8_t x, uint8_t y, bool on) {
  8000eda:	2b0f      	cmp	r3, #15
  8000edc:	d83d      	bhi.n	8000f5a <setPixel16+0x9a>
 
-    uint8_t byteIndex = x / MAX7219_COLS;       // 0 o 1
+// el frameBuffer16 tiene 16 filas y 2 columans de 8 bits cada una. Para pintar un pixel es importante determinar en que columna estamos y dentro de la columna que bit queremos pintar
+
+    uint8_t byteIndex = x / MAX7219_COLS;       // byteIndex determina en que columna esta el pixel. si da 0 estamos en la columna derecha. Si da 1 estamos en la columna izquierda
  8000ede:	79fb      	ldrb	r3, [r7, #7]
  8000ee0:	08db      	lsrs	r3, r3, #3
  8000ee2:	73fb      	strb	r3, [r7, #15]
-    uint8_t bitIndex  = x % MAX7219_COLS;       // 0 a 7
+    uint8_t bitIndex  = x % MAX7219_COLS;       // bitIndex determina dentro de la columan, cual es el pixel a pintar.
  8000ee4:	79fb      	ldrb	r3, [r7, #7]
  8000ee6:	f003 0307 	and.w	r3, r3, #7
  8000eea:	73bb      	strb	r3, [r7, #14]
@@ -10766,7 +10768,7 @@ void arcadeFSM(void)
  80042ce:	701a      	strb	r2, [r3, #0]
         	}
 
-        	if (readKey(BACK)){
+        	if (readKey(BACK)){								//presionar el boton de "back" pausa el juego
  80042d0:	2000      	movs	r0, #0
  80042d2:	f7fd f927 	bl	8001524 <readKey>
  80042d6:	4603      	mov	r3, r0
@@ -11022,9 +11024,9 @@ static void spawnFood(void) {
     uint8_t valid = 0;
  800445a:	2300      	movs	r3, #0
  800445c:	71fb      	strb	r3, [r7, #7]
-    while (!valid) {
+    while (!valid) {								// mientras que la manzana este sobre la serpiente se vuelve a generar
  800445e:	e03c      	b.n	80044da <spawnFood+0x86>
-        food.pos.x = rand() % DISPLAY_COLS;
+        food.pos.x = rand() % DISPLAY_COLS;			// esta implementacion puede ser un problema cuando la serpiente ocupa gran parte del buffer al no descartar posiciones ya generadas.
  8004460:	f000 f9ce 	bl	8004800 <rand>
  8004464:	4603      	mov	r3, r0
  8004466:	425a      	negs	r2, r3
@@ -11085,7 +11087,7 @@ static void spawnFood(void) {
  80044d4:	88bb      	ldrh	r3, [r7, #4]
  80044d6:	4293      	cmp	r3, r2
  80044d8:	d3e1      	bcc.n	800449e <spawnFood+0x4a>
-    while (!valid) {
+    while (!valid) {								// mientras que la manzana este sobre la serpiente se vuelve a generar
  80044da:	79fb      	ldrb	r3, [r7, #7]
  80044dc:	2b00      	cmp	r3, #0
  80044de:	d0bf      	beq.n	8004460 <spawnFood+0xc>
@@ -11456,7 +11458,7 @@ bool snakeUpdate(void) {
  800474c:	e051      	b.n	80047f2 <snakeUpdate+0xb6>
 	}
 // segun el boton que se presione cambia la direccion de la serpiente. Aca se valida que la serpiente no pueda "volver sobre si misma"
-    if (readKey(2) && snake.dir != LEFT) snake.dir = RIGHT;
+    if (readKey(DERECHA) && snake.dir != LEFT) snake.dir = RIGHT;
  800474e:	2002      	movs	r0, #2
  8004750:	f7fc fee8 	bl	8001524 <readKey>
  8004754:	4603      	mov	r3, r0
@@ -11469,7 +11471,7 @@ bool snakeUpdate(void) {
  8004764:	4b24      	ldr	r3, [pc, #144]	@ (80047f8 <snakeUpdate+0xbc>)
  8004766:	2203      	movs	r2, #3
  8004768:	f883 2201 	strb.w	r2, [r3, #513]	@ 0x201
-    if (readKey(3) && snake.dir != DOWN) snake.dir = UP;
+    if (readKey(ARRIBA) && snake.dir != DOWN) snake.dir = UP;
  800476c:	2003      	movs	r0, #3
  800476e:	f7fc fed9 	bl	8001524 <readKey>
  8004772:	4603      	mov	r3, r0
@@ -11482,7 +11484,7 @@ bool snakeUpdate(void) {
  8004782:	4b1d      	ldr	r3, [pc, #116]	@ (80047f8 <snakeUpdate+0xbc>)
  8004784:	2200      	movs	r2, #0
  8004786:	f883 2201 	strb.w	r2, [r3, #513]	@ 0x201
-    if (readKey(4) && snake.dir != RIGHT) snake.dir = LEFT;
+    if (readKey(IZQUIERDA) && snake.dir != RIGHT) snake.dir = LEFT;
  800478a:	2004      	movs	r0, #4
  800478c:	f7fc feca 	bl	8001524 <readKey>
  8004790:	4603      	mov	r3, r0
@@ -11495,7 +11497,7 @@ bool snakeUpdate(void) {
  80047a0:	4b15      	ldr	r3, [pc, #84]	@ (80047f8 <snakeUpdate+0xbc>)
  80047a2:	2202      	movs	r2, #2
  80047a4:	f883 2201 	strb.w	r2, [r3, #513]	@ 0x201
-    if (readKey(5) && snake.dir != UP) snake.dir = DOWN;
+    if (readKey(ABAJO) && snake.dir != UP) snake.dir = DOWN;
  80047a8:	2005      	movs	r0, #5
  80047aa:	f7fc febb 	bl	8001524 <readKey>
  80047ae:	4603      	mov	r3, r0
