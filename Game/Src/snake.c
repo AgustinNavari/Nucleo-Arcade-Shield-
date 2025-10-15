@@ -15,8 +15,8 @@ static const uint8_t SNAKESPEED = 110; //velodicad de la serpiente
 //spawnFood hace aparecer una nueva manzana dentro del tablero. Valida que no aparezca sobre la serpiente.
 static void spawnFood(void) {
     uint8_t valid = 0;
-    while (!valid) {
-        food.pos.x = rand() % DISPLAY_COLS;
+    while (!valid) {								// mientras que la manzana este sobre la serpiente se vuelve a generar
+        food.pos.x = rand() % DISPLAY_COLS;			// esta implementacion puede ser un problema cuando la serpiente ocupa gran parte del buffer al no descartar posiciones ya generadas.
         food.pos.y = rand() % DISPLAY_ROWS;
         valid = 1;
         for (uint16_t i = 0; i < snake.length; i++) {

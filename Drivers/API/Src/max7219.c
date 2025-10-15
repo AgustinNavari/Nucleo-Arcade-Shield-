@@ -32,8 +32,10 @@ void setPixel16(uint8_t x, uint8_t y, bool on) {
 
     if (x >= DISPLAY_COLS || y >= DISPLAY_ROWS) return;  // valida que este dentro del rango de la pantalla
 
-    uint8_t byteIndex = x / MAX7219_COLS;       // 0 o 1
-    uint8_t bitIndex  = x % MAX7219_COLS;       // 0 a 7
+// el frameBuffer16 tiene 16 filas y 2 columans de 8 bits cada una. Para pintar un pixel es importante determinar en que columna estamos y dentro de la columna que bit queremos pintar
+
+    uint8_t byteIndex = x / MAX7219_COLS;       // byteIndex determina en que columna esta el pixel. si da 0 estamos en la columna derecha. Si da 1 estamos en la columna izquierda
+    uint8_t bitIndex  = x % MAX7219_COLS;       // bitIndex determina dentro de la columan, cual es el pixel a pintar.
 
     if (on)
         frameBuffer16[y][byteIndex] |=  (1 << bitIndex);

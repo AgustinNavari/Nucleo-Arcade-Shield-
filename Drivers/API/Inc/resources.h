@@ -7,6 +7,14 @@
 typedef bool pinState_t;
 typedef bool bool_t;
 
+typedef enum{
+	BACK,
+	START,
+	DERECHA,
+	ARRIBA,
+	IZQUIERDA,
+	ABAJO
+}input_t;
 
 typedef enum{
 	BUTTON_UP,

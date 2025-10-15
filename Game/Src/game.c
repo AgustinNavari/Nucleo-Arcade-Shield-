@@ -6,6 +6,12 @@
 #include "At24c256.h"
 #include <stdio.h>
 
+static char textMenu1[] = "SNAKE";
+static char textMenu2[] = "      PRESIONE START";
+static char textPause1[]= "PAUSA";
+static char textPause2[]= "     PAUSA";
+
+
 ArcadeState_t arcadeState = BOOT;
 
 //arcadeFSM controla los diferentes posibles estados del juego.
@@ -20,31 +26,36 @@ void arcadeFSM(void)
 			arcadeState = MENU;
 			break;
 
+		//MENU del juego. Scroll de texto y espera un input para jugar o mostrar el highscore
         case MENU:
-        	char text1[] = "SNAKE";
-        	char text2[] = "PRESIONE START";
-        	scrollTextDual(0, text1, 8, text2,false);
-        	if (readKey(1)){
+
+        	scrollTextDual(0, textMenu1, 8, textMenu2,false);
+
+        	if (readKey(START)){
         		arcadeState = PLAYING;
         		startScreen();
         		snakeInit();
         	}
-        	if (readKey(0)){
+
+        	if (readKey(BACK)){
         		arcadeState = HSCORE;
         		snakeInit();
         	}
+
             break;
 
+        //PLAYING juego en curso
         case PLAYING:
 
         	if(snakeUpdate() == false){
-        		if(currentScore > loadScore()){
+        		if(currentScore > loadScore()){				//se guarda la puntuacion actual si es mayor a la puntuacion guardada mas alta
         			saveScore(currentScore);
         		}
         		startScreen();
         		arcadeState = GAME_OVER;
         	}
-        	if (readKey(0)){
+
+        	if (readKey(BACK)){								//presionar el boton de "back" pausa el juego
         		arcadeState = PAUSED;
         	}
 
@@ -52,22 +63,23 @@ void arcadeFSM(void)
 
         case PAUSED:
 
-        	char text5[] = "PAUSA";
-        	char text6[] = "     PAUSA";
-        	scrollTextDual(0, text5, 8, text6,true);
-        	if (readKey(1)){
+        	scrollTextDual(0, textPause1, 8, textPause2,true);
+        	if (readKey(START)){
         		arcadeState = PLAYING;
         	}
 
             break;
 
         case GAME_OVER:
+
         	char text3[40];
         	sprintf(text3,"ACTUAL %u", currentScore);
         	char text4[40];
         	sprintf(text4,"HIGHSCORE %u", loadScore());
+
         	scrollTextDual(0, text3, 8, text4,true);
-            if (readKey(1)) {
+
+        	if (readKey(START)) {
             	startScreen();
                 arcadeState = MENU;
             }
@@ -80,9 +92,11 @@ void arcadeFSM(void)
 			char text8[40];
 			sprintf(text8,"         %u", loadScore());
 			scrollTextDual(0, text7, 8, text8,true);
-            if (readKey(1)) {
+
+			if (readKey(START)) {
                 arcadeState = MENU;
             }
+
             break;
 
         default:

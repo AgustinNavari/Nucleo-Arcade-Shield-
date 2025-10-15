@@ -1,8 +1,8 @@
 ../Drivers/API/Src/max7219.c:9:6:MAX7219_InitAll	3
 ../Drivers/API/Src/max7219.c:31:6:setPixel16	4
-../Drivers/API/Src/max7219.c:44:16:reverseBits	1
-../Drivers/API/Src/max7219.c:52:6:updateDisplay16	2
-../Drivers/API/Src/max7219.c:66:24:findChar	3
-../Drivers/API/Src/max7219.c:77:13:drawChar16	3
-../Drivers/API/Src/max7219.c:92:6:fill16	2
-../Drivers/API/Src/max7219.c:98:6:scrollTextDual	7
+../Drivers/API/Src/max7219.c:45:16:reverseBits	1
+../Drivers/API/Src/max7219.c:53:6:updateDisplay16	2
+../Drivers/API/Src/max7219.c:67:24:findChar	3
+../Drivers/API/Src/max7219.c:78:13:drawChar16	3
+../Drivers/API/Src/max7219.c:93:6:fill16	2
+../Drivers/API/Src/max7219.c:99:6:scrollTextDual	7
