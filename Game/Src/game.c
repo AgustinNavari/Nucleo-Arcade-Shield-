@@ -29,7 +29,7 @@ void arcadeFSM(void)
 		//MENU del juego. Scroll de texto y espera un input para jugar o mostrar el highscore
         case MENU:
 
-        	scrollTextDual(0, textMenu1, 8, textMenu2,false);
+        	scrollTextDual(0, textMenu1, 8, textMenu2);
 
         	if (readKey(START)){
         		arcadeState = PLAYING;
@@ -63,7 +63,7 @@ void arcadeFSM(void)
 
         case PAUSED:
 
-        	scrollTextDual(0, textPause1, 8, textPause2,true);
+        	scrollTextDual(0, textPause1, 8, textPause2);
         	if (readKey(START)){
         		arcadeState = PLAYING;
         	}
@@ -77,7 +77,7 @@ void arcadeFSM(void)
         	char text4[40];
         	sprintf(text4,"HIGHSCORE %u", loadScore());
 
-        	scrollTextDual(0, text3, 8, text4,true);
+        	scrollTextDual(0, text3, 8, text4);
 
         	if (readKey(START)) {
             	startScreen();
@@ -91,7 +91,7 @@ void arcadeFSM(void)
         	char text7[] = "HIGHSCORE";
 			char text8[40];
 			sprintf(text8,"         %u", loadScore());
-			scrollTextDual(0, text7, 8, text8,true);
+			scrollTextDual(0, text7, 8, text8);
 
 			if (readKey(START)) {
                 arcadeState = MENU;

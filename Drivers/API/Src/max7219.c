@@ -3,7 +3,7 @@
 #include "resources.h"
 
 
-static uint8_t frameBuffer16[DISPLAY_ROWS][DISPLAY_COLS/8]; // representacion del display en RAM. 16 filas y dos columnas de 8 bits cada una (16 columnas)
+static uint8_t frameBuffer16[DISPLAY_ROWS][DISPLAY_COLS/8]; // se separa el framebuffer en dos columnas de 8 bits para simplificar el mapeo con los MAX7219
 
 // Se inicializan los 4 displays
 void MAX7219_InitAll(void)
@@ -30,9 +30,7 @@ void MAX7219_InitAll(void)
 // enciende o apaga un pixel de la matriz en la posicion (x,y)
 void setPixel16(uint8_t x, uint8_t y, bool on) {
 
-    if (x >= DISPLAY_COLS || y >= DISPLAY_ROWS) return;  // valida que este dentro del rango de la pantalla
-
-// el frameBuffer16 tiene 16 filas y 2 columans de 8 bits cada una. Para pintar un pixel es importante determinar en que columna estamos y dentro de la columna que bit queremos pintar
+    if (x >= DISPLAY_COLS || y >= DISPLAY_ROWS) return;  // valida que el pixel a dibujar este dentro del rango del display para evitar accesos fuera de memoria
 
     uint8_t byteIndex = x / MAX7219_COLS;       // byteIndex determina en que columna esta el pixel. si da 0 estamos en la columna derecha. Si da 1 estamos en la columna izquierda
     uint8_t bitIndex  = x % MAX7219_COLS;       // bitIndex determina dentro de la columan, cual es el pixel a pintar.
@@ -51,7 +49,9 @@ static uint8_t reverseBits(uint8_t b) {
     return b;
 }
 
-// actualiza el display con lo que hay en el frameBuffer. Considera que en mi HW, los dos displays de abajo estan boca abajo e invertidos
+// actualiza el display con el contenido del frameBuffer.
+// considera que en el hardware utilizado los dos displays de abajo estan boca abajo y rotados.
+// por lo que es necesario invertir el orden de las filas y los bits antes de enviarlos al display.
 void updateDisplay16(void)
 {
     for (uint8_t y = 0; y < MAX7219_ROWS; y++) {
@@ -98,7 +98,7 @@ void fill16(bool on)
 }
 
 //scrollTextDual scrolea el texto en pantalla. Escribe hasta dos lineas de texto, una en cada fila de displays.
-void scrollTextDual(uint8_t y1, char *text1, uint8_t y2, char *text2, bool reset) {
+void scrollTextDual(uint8_t y1, char *text1, uint8_t y2, char *text2) {
 
     static int16_t offset = 0;     // posición inicial (fuera de la pantalla)
     static delay_t scrollDelay;
