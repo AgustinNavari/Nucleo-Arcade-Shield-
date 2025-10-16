@@ -10,6 +10,8 @@ static char textMenu1[] = "SNAKE";
 static char textMenu2[] = "      PRESIONE START";
 static char textPause1[]= "PAUSA";
 static char textPause2[]= "     PAUSA";
+static char textBlank[]= " ";
+static char textHighscore[]= "HIGHSCORE";
 
 
 ArcadeState_t arcadeState = BOOT;
@@ -74,24 +76,21 @@ void arcadeFSM(void)
 
         	char text3[40];
         	sprintf(text3,"ACTUAL %u", currentScore);
-        	char text4[40];
-        	sprintf(text4,"HIGHSCORE %u", loadScore());
 
-        	scrollTextDual(0, text3, 8, text4);
+        	scrollTextDual(0, text3, 8, textBlank);
 
         	if (readKey(START)) {
             	startScreen();
-                arcadeState = MENU;
+                arcadeState = HSCORE;
             }
 
             break;
 
         case HSCORE:
 
-        	char text7[] = "HIGHSCORE";
 			char text8[40];
 			sprintf(text8,"         %u", loadScore());
-			scrollTextDual(0, text7, 8, text8);
+			scrollTextDual(0, textHighscore, 8, text8);
 
 			if (readKey(START)) {
                 arcadeState = MENU;

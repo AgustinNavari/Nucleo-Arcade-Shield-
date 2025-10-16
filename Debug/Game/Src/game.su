@@ -1,3 +1,3 @@
-../Game/Src/game.c:18:6:arcadeFSM	104	static
-../Game/Src/game.c:109:6:systemInit	8	static
-../Game/Src/game.c:119:6:startScreen	16	static
+../Game/Src/game.c:20:6:arcadeFSM	48	static
+../Game/Src/game.c:108:6:systemInit	8	static
+../Game/Src/game.c:118:6:startScreen	16	static

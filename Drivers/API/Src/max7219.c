@@ -94,13 +94,19 @@ static void drawChar16(uint8_t x, uint8_t y, char character) {
 // fill16 llena el buffer con 1 o 0
 void fill16(bool on)
 {
-    memset(frameBuffer16, on ? 0xFF : 0x00, sizeof(frameBuffer16));
+
+	for (uint8_t row = 0; row < DISPLAY_ROWS; row++) {
+	    frameBuffer16[row][0] = on;
+	    frameBuffer16[row][1] = on;
+	}
+
+    // memset(frameBuffer16, on ? 0xFF : 0x00, sizeof(frameBuffer16)); // llena un bloque de memoria (frameBuffer) con un valor específico.
 }
 
-//scrollTextDual scrolea el texto en pantalla. Escribe hasta dos lineas de texto, una en cada fila de displays.
+//scrollTextDual scrolea el texto en pantalla. Escribe hasta dos lineas de texto en el display.
 void scrollTextDual(uint8_t y1, char *text1, uint8_t y2, char *text2) {
 
-    static int16_t offset = 0;     // posición inicial (fuera de la pantalla)
+    static int16_t offset = 0;     // posición inicial del texto
     static delay_t scrollDelay;
     static bool initialized = false;
 
@@ -115,7 +121,7 @@ void scrollTextDual(uint8_t y1, char *text1, uint8_t y2, char *text2) {
         // dibuja la primera linea de texto
         uint16_t len1 = strlen(text1);
         for (uint16_t i = 0; i < len1; i++) {
-            int16_t x = offset - i * 6;
+            int16_t x = offset - i * 6; // cada carácter ocupa 5 columnas de píxeles + 1 columna de espacio
             drawChar16(x, y1, text1[i]);
         }
 
@@ -132,7 +138,7 @@ void scrollTextDual(uint8_t y1, char *text1, uint8_t y2, char *text2) {
 
         // reinicia el display cuando ya termino de pasar el texto
         uint16_t textWidth = (strlen(text1) > strlen(text2) ? strlen(text1) : strlen(text2)) * 6;
-        if (offset > textWidth) offset = -16;
+        if (offset > textWidth) offset = 0;
     }
 }
 
