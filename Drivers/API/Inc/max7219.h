@@ -72,6 +72,7 @@ static const uint8_t TEXTSCROLLSPEED = 80;
 void setPixel16(uint8_t x, uint8_t y, bool on);
 void MAX7219_InitAll(void);
 void updateDisplay16(void);
+void drawChar16(uint8_t x, uint8_t y, char character);
 void fill16(bool on);
 void scrollTextDual(uint8_t y1, char *text1, uint8_t y2, char *text2);
 

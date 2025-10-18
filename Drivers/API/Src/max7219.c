@@ -16,7 +16,7 @@ void MAX7219_InitAll(void)
 
     // Limpia la pantalla
     for (uint8_t row = 1; row <= MAX7219_ROWS; row++) {
-        MAX7219_WriteRowAll(row, 0xFF, 0xFF, 0xFF, 0xFF);
+        MAX7219_WriteRowAll(row, 0, 0, 0, 0);
     }
 
     // Limpia el frameBuffer
@@ -77,7 +77,7 @@ static const Chars5x7* findChar(char character){
 }
 
 // Dibuja un caracter con la esquina superior izquierda ubicada en (x,y)
-static void drawChar16(uint8_t x, uint8_t y, char character) {
+void drawChar16(uint8_t x, uint8_t y, char character) {
 
 	const Chars5x7* symbol = findChar(character);
 
@@ -95,12 +95,7 @@ static void drawChar16(uint8_t x, uint8_t y, char character) {
 void fill16(bool on)
 {
 
-	for (uint8_t row = 0; row < DISPLAY_ROWS; row++) {
-	    frameBuffer16[row][0] = on;
-	    frameBuffer16[row][1] = on;
-	}
-
-    // memset(frameBuffer16, on ? 0xFF : 0x00, sizeof(frameBuffer16)); // llena un bloque de memoria (frameBuffer) con un valor específico.
+    memset(frameBuffer16, on ? 0xFF : 0x00, sizeof(frameBuffer16)); // llena un bloque de memoria (frameBuffer) con un valor específico.
 }
 
 //scrollTextDual scrolea el texto en pantalla. Escribe hasta dos lineas de texto en el display.

@@ -23,6 +23,8 @@
 #include "game.h"
 #include "resources.h"
 #include "main.h"
+#include "max7219_port_stm32.h"
+#include "max7219.h"
 
 /* USER CODE END Includes */
 
@@ -93,7 +95,11 @@ int main(void)
   /* Initialize all configured peripherals */
 
   /* USER CODE BEGIN 2 */
+	systemInit();
 
+
+	fill16(1);
+	updateDisplay16();
 
 
   /* USER CODE END 2 */
@@ -102,11 +108,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  for (uint8_t i = 0; i < NUM_BUTTONS; i++) {
-	  	debounceFSM_update(&buttons[i]);
-	  }
 
-	  arcadeFSM();
 
     /* USER CODE END WHILE */
 
