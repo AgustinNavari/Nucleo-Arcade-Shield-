@@ -122,8 +122,7 @@ bool snakeUpdate(void) {
     if (readKey(ABAJO) && snake.dir != UP) snake.dir = DOWN;
 
 //si paso el "tick" de la serpiente la actualiza
-    if ((HAL_GetTick() - snakeSpeed.startTime) >= snakeSpeed.duration) {
-        snakeSpeed.startTime = HAL_GetTick();
+    if (delayRead(&snakeSpeed)) {
 
         snakeMove();
         snakeDraw();

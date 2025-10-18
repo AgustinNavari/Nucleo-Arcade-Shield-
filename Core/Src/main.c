@@ -17,14 +17,11 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "boardConfig.h"
+
 #include "game.h"
 #include "resources.h"
-#include "max7219.h"
 #include "main.h"
 
 /* USER CODE END Includes */
